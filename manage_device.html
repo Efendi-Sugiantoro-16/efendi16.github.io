@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Perangkat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Manajemen Konfigurasi</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="schedule.html">Jadwal Backup</a></li>
+                    <li class="nav-item"><a class="nav-link" href="log.html">Log Konfigurasi</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="manage_device.html">Manajemen Perangkat</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Konten Manajemen Perangkat -->
+    <div class="container mt-5 pt-4">
+        <h1 class="text-center mb-4">Manajemen Perangkat</h1>
+
+        <!-- Tabel Perangkat yang Terdaftar -->
+        <div class="card shadow mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Perangkat Tersedia</h5>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Nama Perangkat</th>
+                            <th>IP Address</th>
+                            <th>Tipe Perangkat</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Router A</td>
+                            <td>192.168.1.1</td>
+                            <td>Router</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDeviceModal" onclick="editDevice(1)">Edit</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteDevice(1)">Hapus</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>Switch B</td>
+                            <td>192.168.1.2</td>
+                            <td>Switch</td>
+                            <td>
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editDeviceModal" onclick="editDevice(2)">Edit</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteDevice(2)">Hapus</button>
+                            </td>
+                        </tr>
+                        <!-- Baris perangkat lainnya -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Tombol Tambah Perangkat -->
+        <button class="btn btn-success mb-4" data-bs-toggle="modal" data-bs-target="#addDeviceModal">Tambah Perangkat</button>
+
+        <!-- Modal Tambah Perangkat -->
+        <div class="modal fade" id="addDeviceModal" tabindex="-1" aria-labelledby="addDeviceModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="addDeviceModalLabel">Tambah Perangkat Baru</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="addDeviceForm">
+                            <div class="mb-3">
+                                <label for="deviceName" class="form-label">Nama Perangkat</label>
+                                <input type="text" class="form-control" id="deviceName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="deviceIp" class="form-label">IP Address</label>
+                                <input type="text" class="form-control" id="deviceIp" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="deviceType" class="form-label">Tipe Perangkat</label>
+                                <select class="form-select" id="deviceType" required>
+                                    <option value="router">Router</option>
+                                    <option value="switch">Switch</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan Perangkat</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Edit Perangkat -->
+        <div class="modal fade" id="editDeviceModal" tabindex="-1" aria-labelledby="editDeviceModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editDeviceModalLabel">Edit Perangkat</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editDeviceForm">
+                            <div class="mb-3">
+                                <label for="editDeviceName" class="form-label">Nama Perangkat</label>
+                                <input type="text" class="form-control" id="editDeviceName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editDeviceIp" class="form-label">IP Address</label>
+                                <input type="text" class="form-control" id="editDeviceIp" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="editDeviceType" class="form-label">Tipe Perangkat</label>
+                                <select class="form-select" id="editDeviceType" required>
+                                    <option value="router">Router</option>
+                                    <option value="switch">Switch</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-warning">Perbarui Perangkat</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p>&copy; 2024 Manajemen Konfigurasi Perangkat Jaringan. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Fungsi untuk mengedit perangkat
+        function editDevice(deviceId) {
+            // Di sini, bisa menambahkan logika untuk mengambil data perangkat dan menampilkan pada form edit
+            console.log("Mengedit perangkat dengan ID:", deviceId);
+        }
+
+        // Fungsi untuk menghapus perangkat
+        function deleteDevice(deviceId) {
+            // Di sini, bisa menambahkan logika untuk menghapus perangkat dari daftar
+            if (confirm('Apakah Anda yakin ingin menghapus perangkat ini?')) {
+                console.log("Menghapus perangkat dengan ID:", deviceId);
+            }
+        }
+
+        // Fungsi untuk menyimpan perangkat baru
+        document.getElementById("addDeviceForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            // Di sini, bisa menambahkan logika untuk menyimpan perangkat baru
+            alert("Perangkat baru berhasil ditambahkan.");
+            // Tutup modal setelah penyimpanan
+            var modal = bootstrap.Modal.getInstance(document.getElementById('addDeviceModal'));
+            modal.hide();
+        });
+
+        // Fungsi untuk memperbarui perangkat
+        document.getElementById("editDeviceForm").addEventListener("submit", function(e) {
+            e.preventDefault();
+            // Di sini, bisa menambahkan logika untuk memperbarui perangkat
+            alert("Perangkat berhasil diperbarui.");
+            // Tutup modal setelah pembaruan
+            var modal = bootstrap.Modal.getInstance(document.getElementById('editDeviceModal'));
+            modal.hide();
+        });
+    </script>
+</body>
+</html>
